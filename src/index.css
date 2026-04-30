@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 30% 98%;
+    --foreground: 222 47% 11%;
+
+    --navy: 222 55% 13%;
+    --navy-deep: 222 60% 9%;
+    --navy-foreground: 40 30% 98%;
+
+    --gold: 42 65% 52%;
+    --gold-bright: 44 80% 60%;
+    --gold-soft: 42 60% 88%;
+    --gold-foreground: 222 60% 9%;
+
+    --ivory: 40 35% 96%;
+    --elegant-grey: 220 12% 55%;
+    --elegant-grey-soft: 220 15% 92%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 222 55% 13%;
+    --primary-foreground: 40 30% 98%;
+
+    --secondary: 42 65% 52%;
+    --secondary-foreground: 222 60% 9%;
+
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 12% 40%;
+
+    --accent: 42 65% 52%;
+    --accent-foreground: 222 60% 9%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 40 30% 98%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 42 65% 52%;
+
+    --radius: 0.625rem;
+
+    --gradient-hero: linear-gradient(135deg, hsl(222 60% 9%) 0%, hsl(222 55% 18%) 60%, hsl(222 50% 22%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(44 80% 60%) 0%, hsl(42 65% 52%) 50%, hsl(38 70% 45%) 100%);
+    --gradient-radial-gold: radial-gradient(circle at 30% 20%, hsl(42 65% 52% / 0.25), transparent 60%);
+    --gradient-section: linear-gradient(180deg, hsl(40 35% 98%) 0%, hsl(40 30% 95%) 100%);
+    --gradient-dark-card: linear-gradient(145deg, hsl(222 55% 13%) 0%, hsl(222 60% 9%) 100%);
+
+    --shadow-luxury: 0 30px 60px -20px hsl(222 60% 9% / 0.25), 0 10px 30px -10px hsl(42 65% 52% / 0.15);
+    --shadow-gold: 0 10px 30px -8px hsl(42 65% 52% / 0.45);
+    --shadow-card: 0 4px 20px -4px hsl(222 60% 9% / 0.08);
+    --shadow-elegant: 0 20px 50px -15px hsl(222 60% 9% / 0.18);
+
+    --transition-smooth: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, .font-display {
+    font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+    letter-spacing: -0.01em;
+  }
+
+  .font-serif-elegant {
+    font-family: 'Cormorant Garamond', serif;
+  }
+}
+
+@layer utilities {
+  .bg-hero-gradient { background: var(--gradient-hero); }
+  .bg-gold-gradient { background: var(--gradient-gold); }
+  .bg-radial-gold { background: var(--gradient-radial-gold); }
+  .bg-section-gradient { background: var(--gradient-section); }
+  .bg-dark-card { background: var(--gradient-dark-card); }
+
+  .shadow-luxury { box-shadow: var(--shadow-luxury); }
+  .shadow-gold { box-shadow: var(--shadow-gold); }
+  .shadow-card-soft { box-shadow: var(--shadow-card); }
+  .shadow-elegant { box-shadow: var(--shadow-elegant); }
+
+  .transition-smooth { transition: var(--transition-smooth); }
+
+  .text-gradient-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--gold) / 0.6), transparent);
+  }
+
+  .gold-divider-thick {
+    height: 2px;
+    background: var(--gradient-gold);
+    width: 60px;
+  }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--gold) / 0.5); }
+  50% { box-shadow: 0 0 0 12px hsl(var(--gold) / 0); }
+}
+
+.animate-fade-up { animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-pulse-gold { animation: pulse-gold 2s ease-out infinite; }
