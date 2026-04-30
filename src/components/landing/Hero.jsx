@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ChefHat, Building2, GraduationCap } from "lucide-react";
 import Brand from "@/components/Brand";
 import saharaAtrium from "@/assets/sahara-star-atrium.jpg.jpeg";
-import heroKitchen from "@/assets/hero-kitchen.jpg";
+// import heroKitchen from "@/assets/hero-kitchen.jpg";
 import brochurePdf from "@/assets/A-Star_Brochure.pdf?url";
 
 const handleDownloadSyllabus = async () => {
@@ -13,7 +13,7 @@ const handleDownloadSyllabus = async () => {
   const link = document.createElement("a");
 
   link.href = url;
-  link.download = "A-Star_Brochure.pdf";
+  link.download = "https://drive.google.com/file/d/1X0WdEM7Dait-bqAgPNaarWBxcvaoSBFK/view?usp=sharing";
 
   document.body.appendChild(link);
   link.click();
@@ -96,19 +96,8 @@ const Hero = () => {
             <Button asChild variant="gold" size="xl" className="text-base">
               <a href="#register">Register for Entrance Test →</a>
             </Button>
-<<<<<<< HEAD
-            <Button asChild variant="outline-ivory" size="xl">
-              <a
-                href={brochurePdf}
-                download="A-Star_Brochure.pdf"
-                onClick={handleDownloadSyllabus}
-              >
-                Download Syllabus
-              </a>
-=======
              <Button asChild variant="outline-ivory" size="xl">
               <a href="tel:+91 86574 11592">Speak to Counsellor</a>
->>>>>>> 5627e73 (remove supabase, use localStorage)
             </Button>
           </div>
 
