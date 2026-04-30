@@ -1,5 +1,6 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Brand from "@/components/Brand";
 
 const styles = {
   page: {
@@ -82,12 +83,6 @@ const styles = {
     color: "#111827",
     background: "#fff",
   },
-  inputOtp: {
-    textAlign: "center",
-    fontSize: "24px",
-    letterSpacing: "0.5em",
-    fontFamily: "monospace",
-  },
   btn: {
     width: "100%",
     padding: "12px",
@@ -102,30 +97,6 @@ const styles = {
     transition: "background 0.2s",
   },
   btnDisabled: { opacity: 0.6, cursor: "not-allowed" },
-  otpActions: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: "10px",
-    fontSize: "13px",
-  },
-  textBtn: {
-    background: "none",
-    border: "none",
-    cursor: "pointer",
-    padding: 0,
-    fontSize: "13px",
-    color: "#6b7280",
-  },
-  resendBtn: {
-    background: "none",
-    border: "none",
-    cursor: "pointer",
-    padding: 0,
-    fontSize: "13px",
-    color: "#d4a847",
-    textDecoration: "underline",
-  },
   divider: {
     borderTop: "1px solid #e5e7eb",
     marginTop: "24px",
@@ -150,7 +121,7 @@ const useToast = () => {
     setToasts((prev) => [...prev, { id, title, description, variant }]);
     setTimeout(
       () => setToasts((prev) => prev.filter((t) => t.id !== id)),
-      4000,
+      4000
     );
   };
   return { toast, toasts };
@@ -209,65 +180,25 @@ const ToastContainer = ({ toasts }) => (
 const Login = () => {
   const navigate = useNavigate();
   const { toast, toasts } = useToast();
-  const [step, setStep] = useState("email"); // "email" or "otp"
   const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [resendIn, setResendIn] = useState(0);
-  const otpInputRef = useRef(null);
 
   // Check if user is already logged in
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate("/dashboard", { replace: true });
-    });
+    const user = localStorage.getItem("user");
+    if (user) navigate("/dashboard", { replace: true });
   }, [navigate]);
 
-  // Handle Resend Timer
-  useEffect(() => {
-    if (resendIn <= 0) return;
-    const t = setTimeout(() => setResendIn((s) => s - 1), 1000);
-    return () => clearTimeout(t);
-  }, [resendIn]);
-
-  // Focus OTP input when switching to OTP step
-  useEffect(() => {
-    if (step === "otp" && otpInputRef.current) {
-      otpInputRef.current.focus();
-    }
-  }, [step]);
-
-const handleSendOtp = async (e) => {
-  e.preventDefault();
-
-  setLoading(true);
-
-  try {
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { shouldCreateUser: true },
-    });
-
-    if (error) throw error;
-
-    setStep("otp");
-  } catch (err) {
-    console.error(err);
-    alert("Cannot connect to Supabase");
-  } finally {
-    setLoading(false);
-  }
-};
-
-  const handleVerifyOtp = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const code = otp.trim();
     const cleanEmail = email.trim().toLowerCase();
+    const cleanPassword = password.trim();
 
-    if (code.length !== 6) {
+    if (!cleanEmail || !cleanPassword) {
       toast({
-        title: "Wait",
-        description: "Please enter the full 6-digit code.",
+        title: "Missing Fields",
+        description: "Please enter both email and password.",
         variant: "destructive",
       });
       return;
@@ -275,25 +206,13 @@ const handleSendOtp = async (e) => {
 
     setLoading(true);
     try {
-      // Logic for verifying OTP
-      const { data, error } = await supabase.auth.verifyOtp({
-        email: cleanEmail,
-        token: code,
-        type: "email",
-      });
+      // Check against registrations in localStorage
+      const allRegs = JSON.parse(localStorage.getItem("registrations") || "[]");
+      const regRow = allRegs.find(
+        (r) => r.email.trim().toLowerCase() === cleanEmail
+      );
 
-      if (error) throw error;
-      if (!data.session) throw new Error("Verification failed. Try again.");
-
-      // Check user registration
-      const { data: regRows, error: regErr } = await supabase
-        .from("registrations")
-        .select("id, auth_user_id")
-        .ilike("email", cleanEmail)
-        .single();
-
-      if (regErr || !regRows) {
-        await supabase.auth.signOut();
+      if (!regRow) {
         toast({
           title: "Not Found",
           description: "This email is not registered in our system.",
@@ -303,13 +222,21 @@ const handleSendOtp = async (e) => {
         return;
       }
 
-      // Link auth ID
-      if (!regRows.auth_user_id) {
-        await supabase
-          .from("registrations")
-          .update({ auth_user_id: data.session.user.id })
-          .eq("id", regRows.id);
+      if (regRow.password !== cleanPassword) {
+        toast({
+          title: "Login Failed",
+          description: "Incorrect password. Please try again.",
+          variant: "destructive",
+        });
+        setPassword("");
+        return;
       }
+
+      // Save logged in user
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ email: cleanEmail, id: regRow.id })
+      );
 
       toast({ title: "Success", description: "Logging you in..." });
       navigate("/dashboard", { replace: true });
@@ -319,7 +246,6 @@ const handleSendOtp = async (e) => {
         description: err.message,
         variant: "destructive",
       });
-      setOtp("");
     } finally {
       setLoading(false);
     }
@@ -333,115 +259,72 @@ const handleSendOtp = async (e) => {
           ← Back to home
         </Link>
 
-        <div style={styles.brand}>
+         <div className="mb-8">
+          <Brand to="/" subtitle="Student Portal" priority />
+        </div>
+
+        {/* <div style={styles.brand}>
           <p style={styles.brandTitle}>YourBrand</p>
           <p style={styles.brandSubtitle}>Student Portal</p>
-        </div>
+        </div> */}
 
         <div style={styles.card}>
           <div style={styles.cardBody}>
             <div style={styles.badge}>
-              <span style={{ fontSize: "14px" }}>
-                {step === "email" ? "✉" : "🔑"}
-              </span>
-              <span>{step === "email" ? "Login" : "Verification"}</span>
+              <span style={{ fontSize: "14px" }}>✉</span>
+              <span>Login</span>
             </div>
 
-            <h1 style={styles.cardTitle}>
-              {step === "email" ? "Student Login" : "Check your Inbox"}
-            </h1>
+            <h1 style={styles.cardTitle}>Student Login</h1>
 
             <p style={styles.cardDesc}>
-              {step === "email"
-                ? "Enter your registered email to receive a one-time login code."
-                : `We sent a 6-digit code to ${email}`}
+              Enter your registered email and password to login.
             </p>
 
-            {step === "email" ? (
-              <form onSubmit={handleSendOtp}>
-                <div style={styles.formGroup}>
-                  <label htmlFor="email" style={styles.label}>
-                    Email Address
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="name@example.com"
-                    style={styles.input}
-                    disabled={loading}
-                  />
-                </div>
-                <button
-                  type="submit"
+            <form onSubmit={handleLogin}>
+              <div style={styles.formGroup}>
+                <label htmlFor="email" style={styles.label}>
+                  Email Address
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="name@example.com"
+                  style={styles.input}
                   disabled={loading}
-                  style={{
-                    ...styles.btn,
-                    ...(loading ? styles.btnDisabled : {}),
-                  }}
-                >
-                  {loading ? "Sending..." : "Get OTP Code"}
-                </button>
-              </form>
-            ) : (
-              <form onSubmit={handleVerifyOtp}>
-                <div style={styles.formGroup}>
-                  <label htmlFor="otp" style={styles.label}>
-                    6-digit OTP
-                  </label>
-                  <input
-                    id="otp"
-                    ref={otpInputRef}
-                    type="text"
-                    inputMode="numeric"
-                    autoComplete="one-time-code"
-                    maxLength={6}
-                    required
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
-                    placeholder="000000"
-                    style={{ ...styles.input, ...styles.inputOtp }}
-                    disabled={loading}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={loading || otp.length < 6}
-                  style={{
-                    ...styles.btn,
-                    ...(loading || otp.length < 6 ? styles.btnDisabled : {}),
-                  }}
-                >
-                  {loading ? "Verifying..." : "Verify & Continue"}
-                </button>
+                />
+              </div>
 
-                <div style={styles.otpActions}>
-                  <button
-                    type="button"
-                    style={styles.textBtn}
-                    onClick={() => {
-                      setStep("email");
-                      setOtp("");
-                    }}
-                  >
-                    Use different email
-                  </button>
-                  <button
-                    type="button"
-                    disabled={resendIn > 0 || loading}
-                    onClick={() => handleSendOtp()}
-                    style={{
-                      ...styles.resendBtn,
-                      ...(resendIn > 0 || loading ? styles.btnDisabled : {}),
-                    }}
-                  >
-                    {resendIn > 0 ? `Resend in ${resendIn}s` : "Resend OTP"}
-                  </button>
-                </div>
-              </form>
-            )}
+              <div style={styles.formGroup}>
+                <label htmlFor="password" style={styles.label}>
+                  Password
+                </label>
+                <input
+                  id="password"
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  style={styles.input}
+                  disabled={loading}
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                style={{
+                  ...styles.btn,
+                  ...(loading ? styles.btnDisabled : {}),
+                }}
+              >
+                {loading ? "Logging in..." : "Login"}
+              </button>
+            </form>
 
             <div style={styles.divider}>
               <p style={styles.dividerText}>
@@ -453,6 +336,10 @@ const handleSendOtp = async (e) => {
             </div>
           </div>
         </div>
+
+        <p style={styles.footer}>
+          © {new Date().getFullYear()} YourBrand. All rights reserved.
+        </p>
       </div>
     </main>
   );

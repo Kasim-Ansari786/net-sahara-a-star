@@ -72,8 +72,8 @@ const Hero = () => {
             <Button asChild variant="gold" size="xl" className="text-base">
               <a href="#register">Register for Entrance Test →</a>
             </Button>
-            <Button asChild variant="outline-ivory" size="xl">
-              <a href="tel:+919999999999">Speak to Counsellor</a>
+             <Button asChild variant="outline-ivory" size="xl">
+              <a href="tel:+91 86574 11592">Speak to Counsellor</a>
             </Button>
           </div>
 

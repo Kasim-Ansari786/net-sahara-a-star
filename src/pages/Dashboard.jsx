@@ -38,47 +38,47 @@ const Dashboard = () => {
   useEffect(() => {
     let cancelled = false;
     localStorage.removeItem("dev_bypass_email");
-    (async () => {
-      const { data: sess } = await supabase.auth.getSession();
-      if (!sess.session) {
-        navigate("/login", { replace: true });
-        return;
-      }
-      const email = sess.session.user.email ?? "";
-      const { data: rows, error } = await supabase
-        .from("registrations")
-        .select("*")
-        .ilike("email", email)
-        .limit(1);
-      if (cancelled) return;
-      if (error) {
-        toast({ title: "Could not load your dashboard", description: error.message, variant: "destructive" });
-        setLoading(false);
-        return;
-      }
-      if (!rows || rows.length === 0) {
-        await supabase.auth.signOut();
-        toast({ title: "No registration found for your email" });
-        navigate("/login", { replace: true });
-        return;
-      }
-      setReg(rows[0]);
 
-      if (rows[0].assigned_counsellor_id) {
-        const { data: c } = await supabase
-          .from("counsellors")
-          .select("id,name,email,phone")
-          .eq("id", rows[0].assigned_counsellor_id)
-          .maybeSingle();
-        if (!cancelled && c) setCounsellor(c);
-      }
-      setLoading(false);
-    })();
+    const userRaw = localStorage.getItem("user");
+    if (!userRaw) {
+      navigate("/login", { replace: true });
+      return;
+    }
+
+    const user = JSON.parse(userRaw);
+    const email = user.email ?? "";
+
+    // Load registration from localStorage
+    const allRegs = JSON.parse(localStorage.getItem("registrations") || "[]");
+    const rows = allRegs.filter(
+      (r) => r.email.trim().toLowerCase() === email.trim().toLowerCase()
+    );
+
+    if (cancelled) return;
+
+    if (!rows || rows.length === 0) {
+      localStorage.removeItem("user");
+      toast({ title: "No registration found for your email" });
+      navigate("/login", { replace: true });
+      return;
+    }
+
+    setReg(rows[0]);
+
+    // Load counsellor if assigned
+    if (rows[0].assigned_counsellor_id) {
+      const allCounsellors = JSON.parse(localStorage.getItem("counsellors") || "[]");
+      const c = allCounsellors.find((c) => c.id === rows[0].assigned_counsellor_id);
+      if (!cancelled && c) setCounsellor(c);
+    }
+
+    setLoading(false);
+
     return () => { cancelled = true; };
   }, [navigate, toast]);
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
+  const handleLogout = () => {
+    localStorage.removeItem("user");
     navigate("/", { replace: true });
   };
 
@@ -421,7 +421,15 @@ const Dashboard = () => {
             )}
             <div className="flex justify-between">
               <span className="text-muted-foreground">Registered</span>
-              <span>{new Date(reg.created_at).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</span>
+              <span>
+                {reg.created_at
+                  ? new Date(reg.created_at).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })
+                  : "—"}
+              </span>
             </div>
           </div>
         </div>

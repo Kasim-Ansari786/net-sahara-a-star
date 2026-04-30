@@ -3,10 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { MessageCircle, Phone, X } from "lucide-react";
 
+const PHONE_NUMBER = "+918657411592"; // clean format
+const WHATSAPP_NUMBER = "918657411592"; // without +
+
 export const StickyMobileCTA = () => (
   <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-navy-deep/95 backdrop-blur border-t border-gold/30 px-3 py-2.5 flex gap-2 shadow-luxury">
     <Button asChild variant="outline-ivory" size="default" className="flex-1">
-      <a href="tel:+919999999999"><Phone className="h-4 w-4" /> Counsellor</a>
+      <a href={`tel:${PHONE_NUMBER}`}>
+        <Phone className="h-4 w-4" /> Counsellor
+      </a>
     </Button>
     <Button asChild variant="gold" size="default" className="flex-1">
       <a href="#register">Register ₹500</a>
@@ -16,7 +21,7 @@ export const StickyMobileCTA = () => (
 
 export const WhatsAppFloat = () => (
   <a
-    href="https://wa.me/919999999999?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20A-Star%20Academy"
+    href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20A-Star%20`}
     target="_blank"
     rel="noreferrer"
     aria-label="Chat on WhatsApp"
@@ -48,24 +53,43 @@ export const ExitIntentPopup = () => {
       <DialogContent className="sm:max-w-md p-0 overflow-hidden border-gold/30">
         <div className="bg-hero-gradient text-ivory p-8 relative">
           <div className="absolute inset-0 bg-radial-gold opacity-40" />
-          <button onClick={() => setOpen(false)} aria-label="Close" className="absolute top-3 right-3 text-ivory/70 hover:text-gold z-10">
+          <button
+            onClick={() => setOpen(false)}
+            aria-label="Close"
+            className="absolute top-3 right-3 text-ivory/70 hover:text-gold z-10"
+          >
             <X className="h-5 w-5" />
           </button>
+
           <div className="relative">
-            <div className="text-xs uppercase tracking-[0.3em] text-gold mb-3">Wait!</div>
+            <div className="text-xs uppercase tracking-[0.3em] text-gold mb-3">
+              Wait!
+            </div>
+
             <DialogHeader>
               <DialogTitle className="font-display text-3xl text-ivory leading-tight">
                 Still Deciding?
               </DialogTitle>
               <DialogDescription className="text-ivory/75 text-base mt-3">
-                Book a <span className="text-gold font-semibold">free counselling call</span> with our expert. We'll help you choose the right path for your child — no pressure, no fees.
+                Book a{" "}
+                <span className="text-gold font-semibold">
+                  free counselling call
+                </span>{" "}
+                with our expert.
               </DialogDescription>
             </DialogHeader>
+
             <div className="mt-6 flex flex-col gap-2">
               <Button asChild variant="gold" size="lg">
-                <a href="tel:+919999999999">Get Free Counselling Call</a>
+                <a href={`tel:${PHONE_NUMBER}`}>
+                  Get Free Counselling Call
+                </a>
               </Button>
-              <Button variant="outline-ivory" size="lg" onClick={() => setOpen(false)}>
+              <Button
+                variant="outline-ivory"
+                size="lg"
+                onClick={() => setOpen(false)}
+              >
                 Maybe Later
               </Button>
             </div>
