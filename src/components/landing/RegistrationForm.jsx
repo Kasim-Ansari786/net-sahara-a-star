@@ -12,6 +12,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Lock, ShieldCheck, Sparkles, CheckCircle2, CreditCard } from "lucide-react";
 import { z } from "zod";
+import { registerStudent } from "../../../api";
 
 // ─── PayU payment link ───────────────────────────────────────────────────────
 const PAYU_LINK = "https://u.payu.in/PAYUMN/2raSPHLNDEcz";
@@ -50,7 +51,7 @@ const RegistrationForm = () => {
   const [step, setStep] = useState("form");
   const [registeredData, setRegisteredData] = useState(null);
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
 
   const fd = new FormData(e.currentTarget);
@@ -82,7 +83,7 @@ const handleSubmit = (e) => {
     return;
   }
 
-  // ❌ Password mismatch
+  // ❌ Password mismatch (redundant because of refine, but keep user-friendly message)
   if (parsed.data.password !== parsed.data.confirmPassword) {
     toast({
       title: "Error",
@@ -92,8 +93,41 @@ const handleSubmit = (e) => {
     return;
   }
 
-  // ✅ SUCCESS → OPEN PAYU
-  window.open(PAYU_LINK, "_blank");
+  setSubmitting(true);
+  try {
+    // Save details to backend before redirecting to payment
+    const payload = {
+      studentName: parsed.data.studentName,
+      parentName: parsed.data.parentName,
+      mobile: parsed.data.mobile,
+      whatsapp: parsed.data.whatsapp,
+      email: parsed.data.email,
+      city: parsed.data.city,
+      twelfthStatus: parsed.data.twelfthStatus,
+      stream: parsed.data.stream,
+      careerInterest: parsed.data.careerInterest,
+      mattersMost: parsed.data.mattersMost,
+      password: parsed.data.password,
+    };
+
+    const res = await registerStudent(payload);
+
+    // backend returns { success: true, data: student }
+    const saved = res?.data ?? res;
+    setRegisteredData(saved);
+    setStep("pay");
+
+    toast({
+      title: "Details saved",
+      description: "Your details have been saved. Proceed to payment.",
+    });
+  } catch (err) {
+    console.error("Registration save failed:", err);
+    const msg = err?.data?.message || err?.message || "Unable to save registration";
+    toast({ title: "Save failed", description: msg, variant: "destructive" });
+  } finally {
+    setSubmitting(false);
+  }
 };
 
   // Called when user clicks "I have paid" after returning from PayU
