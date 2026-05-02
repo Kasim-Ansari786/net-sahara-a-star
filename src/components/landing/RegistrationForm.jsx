@@ -10,19 +10,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import {
-  Lock,
-  ShieldCheck,
-  Sparkles,
-  CheckCircle2,
-  CreditCard,
-} from "lucide-react";
+import { Lock, ShieldCheck, Sparkles, CheckCircle2, CreditCard } from "lucide-react";
 import { z } from "zod";
-import { registerStudent } from "../../../api";
 
 // ─── PayU payment link ───────────────────────────────────────────────────────
-const PAYU_LINK = "https://u.payu.in/PAYUMN/vrQpASr3vMyG";
+const PAYU_LINK = "https://u.payu.in/PAYUMN/2raSPHLNDEcz";
 
 const schema = z
   .object({
@@ -58,92 +50,52 @@ const RegistrationForm = () => {
   const [step, setStep] = useState("form");
   const [registeredData, setRegisteredData] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-    const fd = new FormData(e.currentTarget);
+  const fd = new FormData(e.currentTarget);
 
-    const raw = {
-      studentName: String(fd.get("studentName") ?? ""),
-      parentName: String(fd.get("parentName") ?? ""),
-      mobile: String(fd.get("mobile") ?? ""),
-      whatsapp: String(fd.get("whatsapp") ?? ""),
-      email: String(fd.get("email") ?? ""),
-      city: String(fd.get("city") ?? ""),
-      twelfthStatus: String(fd.get("twelfthStatus") ?? ""),
-      stream: String(fd.get("stream") ?? ""),
-      careerInterest: String(fd.get("careerInterest") ?? ""),
-      mattersMost: String(fd.get("mattersMost") ?? ""),
-      password: String(fd.get("password") ?? ""),
-      confirmPassword: String(fd.get("confirmPassword") ?? ""),
-    };
-
-    // ✅ Validate using Zod
-    const parsed = schema.safeParse(raw);
-
-    if (!parsed.success) {
-      toast({
-        title: "Please check your details",
-        description: parsed.error.errors[0]?.message ?? "Invalid input",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // 🔴 Password match check
-    if (parsed.data.password !== parsed.data.confirmPassword) {
-      toast({
-        title: "Error",
-        description: "Passwords do not match",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    try {
-      setSubmitting(true);
-
-      // 🚀 CALL YOUR BACKEND API
-      const response = await registerStudent({
-        studentName: parsed.data.studentName,
-        parentName: parsed.data.parentName,
-        mobile: parsed.data.mobile,
-        whatsapp: parsed.data.whatsapp,
-        email: parsed.data.email,
-        city: parsed.data.city,
-        password: parsed.data.password,
-        twelfthStatus: parsed.data.twelfthStatus,
-        stream: parsed.data.stream,
-        careerInterest: parsed.data.careerInterest,
-        mattersMost: parsed.data.mattersMost,
-      });
-
-      // ✅ SUCCESS
-      toast({
-        title: "Success",
-        description: "Registration completed successfully",
-      });
-
-      // Move to payment step
-      setRegisteredData({
-        studentName: parsed.data.studentName,
-        email: parsed.data.email,
-      });
-
-      setStep("pay");
-      e.target.reset();
-    } catch (error) {
-      console.error(error);
-
-      toast({
-        title: "Submission failed",
-        description: error.message || "Something went wrong",
-        variant: "destructive",
-      });
-    } finally {
-      setSubmitting(false);
-    }
+  const raw = {
+    studentName: String(fd.get("studentName") ?? ""),
+    parentName: String(fd.get("parentName") ?? ""),
+    mobile: String(fd.get("mobile") ?? ""),
+    whatsapp: String(fd.get("whatsapp") ?? ""),
+    email: String(fd.get("email") ?? ""),
+    city: String(fd.get("city") ?? ""),
+    twelfthStatus: String(fd.get("twelfthStatus") ?? ""),
+    stream: String(fd.get("stream") ?? ""),
+    careerInterest: String(fd.get("careerInterest") ?? ""),
+    mattersMost: String(fd.get("mattersMost") ?? ""),
+    password: String(fd.get("password") ?? ""),
+    confirmPassword: String(fd.get("confirmPassword") ?? ""),
   };
+
+  const parsed = schema.safeParse(raw);
+
+  // ❌ Validation error
+  if (!parsed.success) {
+    toast({
+      title: "Please check your details",
+      description: parsed.error.errors[0]?.message ?? "Invalid input",
+      variant: "destructive",
+    });
+    return;
+  }
+
+  // ❌ Password mismatch
+  if (parsed.data.password !== parsed.data.confirmPassword) {
+    toast({
+      title: "Error",
+      description: "Passwords do not match",
+      variant: "destructive",
+    });
+    return;
+  }
+
+  // ✅ SUCCESS → OPEN PAYU
+  window.open(PAYU_LINK, "_blank");
+};
+
   // Called when user clicks "I have paid" after returning from PayU
   const handlePaymentDone = () => {
     setStep("done");
@@ -171,12 +123,8 @@ const RegistrationForm = () => {
                     <h3 className="font-display text-2xl">Complete Payment</h3>
                   </div>
                   <div className="text-right">
-                    <div className="text-xs text-ivory/60 uppercase tracking-wider">
-                      Amount
-                    </div>
-                    <div className="font-display text-3xl text-gradient-gold">
-                      ₹500
-                    </div>
+                    <div className="text-xs text-ivory/60 uppercase tracking-wider">Amount</div>
+                    <div className="font-display text-3xl text-gradient-gold">₹500</div>
                   </div>
                 </div>
               </div>
@@ -184,33 +132,23 @@ const RegistrationForm = () => {
               <div className="p-8 text-center">
                 {/* Student info summary */}
                 <div className="mb-6 p-4 rounded-xl bg-gold/5 border border-gold/20 text-left">
-                  <div className="text-xs uppercase tracking-widest text-gold mb-3">
-                    Registration Summary
-                  </div>
+                  <div className="text-xs uppercase tracking-widest text-gold mb-3">Registration Summary</div>
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Student</span>
-                      <span className="font-medium text-navy">
-                        {registeredData?.studentName}
-                      </span>
+                      <span className="font-medium text-navy">{registeredData?.studentName}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Email</span>
-                      <span className="font-medium text-navy">
-                        {registeredData?.email}
-                      </span>
+                      <span className="font-medium text-navy">{registeredData?.email}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Exam Date</span>
                       <span className="font-medium text-navy">17 May 2025</span>
                     </div>
                     <div className="flex justify-between border-t border-gold/20 pt-2 mt-2">
-                      <span className="text-muted-foreground">
-                        Registration Fee
-                      </span>
-                      <span className="font-bold text-navy text-base">
-                        ₹500
-                      </span>
+                      <span className="text-muted-foreground">Registration Fee</span>
+                      <span className="font-bold text-navy text-base">₹500</span>
                     </div>
                   </div>
                 </div>
@@ -220,8 +158,7 @@ const RegistrationForm = () => {
                     <CreditCard className="h-8 w-8 text-navy-deep" />
                   </div>
                   <p className="text-muted-foreground text-sm mb-1">
-                    Your details are saved. Click below to pay securely via
-                    PayU.
+                    Your details are saved. Click below to pay securely via PayU.
                   </p>
                   <p className="text-xs text-muted-foreground">
                     You will be redirected to PayU's secure payment page.
@@ -235,11 +172,7 @@ const RegistrationForm = () => {
                   rel="noopener noreferrer"
                   className="block w-full"
                 >
-                  <Button
-                    variant="gold"
-                    size="xl"
-                    className="w-full text-base mb-4"
-                  >
+                  <Button variant="gold" size="xl" className="w-full text-base mb-4">
                     Pay ₹500 via PayU →
                   </Button>
                 </a>
@@ -288,9 +221,7 @@ const RegistrationForm = () => {
               <div className="bg-navy text-ivory p-6 sm:p-8 relative overflow-hidden">
                 <div className="absolute inset-0 bg-radial-gold opacity-30" />
                 <div className="relative">
-                  <div className="text-xs uppercase tracking-[0.3em] text-gold mb-2">
-                    Registration Complete
-                  </div>
+                  <div className="text-xs uppercase tracking-[0.3em] text-gold mb-2">Registration Complete</div>
                   <h3 className="font-display text-2xl">All Done!</h3>
                 </div>
               </div>
@@ -306,18 +237,13 @@ const RegistrationForm = () => {
                 </p>
                 <p className="text-sm text-muted-foreground mb-8">
                   Your hall ticket will be sent to{" "}
-                  <span className="text-navy font-medium">
-                    {registeredData?.email}
-                  </span>{" "}
+                  <span className="text-navy font-medium">{registeredData?.email}</span>{" "}
                   via SMS, WhatsApp & Email.
                 </p>
                 <div className="p-4 rounded-xl bg-gold/5 border border-gold/20 text-sm text-navy mb-8">
-                  📅{" "}
-                  <span className="font-semibold">Exam Date: 17 May 2025</span>
+                  📅 <span className="font-semibold">Exam Date: 17 May 2025</span>
                   <br />
-                  <span className="text-muted-foreground text-xs">
-                    Keep your hall ticket ready
-                  </span>
+                  <span className="text-muted-foreground text-xs">Keep your hall ticket ready</span>
                 </div>
                 <Button
                   variant="outline"
@@ -359,18 +285,12 @@ const RegistrationForm = () => {
             {/* Steps indicator */}
             <div className="flex items-center gap-3 mb-8">
               <div className="flex items-center gap-2">
-                <div className="h-7 w-7 rounded-full bg-gold-gradient flex items-center justify-center text-navy-deep text-xs font-bold shadow-gold">
-                  1
-                </div>
-                <span className="text-sm font-medium text-navy">
-                  Fill Details
-                </span>
+                <div className="h-7 w-7 rounded-full bg-gold-gradient flex items-center justify-center text-navy-deep text-xs font-bold shadow-gold">1</div>
+                <span className="text-sm font-medium text-navy">Fill Details</span>
               </div>
               <div className="flex-1 h-px bg-gold/30" />
               <div className="flex items-center gap-2">
-                <div className="h-7 w-7 rounded-full bg-navy flex items-center justify-center text-gold text-xs font-bold border border-gold/40">
-                  2
-                </div>
+                <div className="h-7 w-7 rounded-full bg-navy flex items-center justify-center text-gold text-xs font-bold border border-gold/40">2</div>
                 <span className="text-sm text-muted-foreground">Pay ₹500</span>
               </div>
             </div>
@@ -401,12 +321,8 @@ const RegistrationForm = () => {
                     <b.icon className="h-5 w-5 text-navy-deep" />
                   </div>
                   <div>
-                    <div className="font-display text-base text-navy">
-                      {b.title}
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {b.desc}
-                    </div>
+                    <div className="font-display text-base text-navy">{b.title}</div>
+                    <div className="text-sm text-muted-foreground">{b.desc}</div>
                   </div>
                 </div>
               ))}
@@ -426,12 +342,8 @@ const RegistrationForm = () => {
                     <h3 className="font-display text-2xl">Fill Your Details</h3>
                   </div>
                   <div className="text-right">
-                    <div className="text-xs text-ivory/60 uppercase tracking-wider">
-                      Total
-                    </div>
-                    <div className="font-display text-3xl text-gradient-gold">
-                      ₹500
-                    </div>
+                    <div className="text-xs text-ivory/60 uppercase tracking-wider">Total</div>
+                    <div className="font-display text-3xl text-gradient-gold">₹500</div>
                   </div>
                 </div>
               </div>
@@ -440,21 +352,11 @@ const RegistrationForm = () => {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <Label htmlFor="studentName">Student Name *</Label>
-                    <Input
-                      id="studentName"
-                      name="studentName"
-                      required
-                      placeholder="Full name"
-                    />
+                    <Input id="studentName" name="studentName" required placeholder="Full name" />
                   </div>
                   <div className="space-y-1.5">
                     <Label htmlFor="parentName">Parent Name *</Label>
-                    <Input
-                      id="parentName"
-                      name="parentName"
-                      required
-                      placeholder="Full name"
-                    />
+                    <Input id="parentName" name="parentName" required placeholder="Full name" />
                   </div>
                 </div>
 
@@ -488,45 +390,22 @@ const RegistrationForm = () => {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <Label htmlFor="email">Email *</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      placeholder="you@example.com"
-                    />
+                    <Input id="email" name="email" type="email" required placeholder="you@example.com" />
                   </div>
                   <div className="space-y-1.5">
                     <Label htmlFor="city">City *</Label>
-                    <Input
-                      id="city"
-                      name="city"
-                      required
-                      placeholder="Your city"
-                    />
+                    <Input id="city" name="city" required placeholder="Your city" />
                   </div>
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <Label htmlFor="password">Password *</Label>
-                    <Input
-                      id="password"
-                      name="password"
-                      type="password"
-                      required
-                      placeholder="••••••••"
-                    />
+                    <Input id="password" name="password" type="password" required placeholder="••••••••" />
                   </div>
                   <div className="space-y-1.5">
                     <Label htmlFor="confirmPassword">Confirm Password *</Label>
-                    <Input
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      type="password"
-                      required
-                      placeholder="••••••••"
-                    />
+                    <Input id="confirmPassword" name="confirmPassword" type="password" required placeholder="••••••••" />
                   </div>
                 </div>
 
@@ -560,9 +439,7 @@ const RegistrationForm = () => {
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label htmlFor="careerInterest">
-                    Preferred Career Interest *
-                  </Label>
+                  <Label htmlFor="careerInterest">Preferred Career Interest *</Label>
                   <Select name="careerInterest" required>
                     <SelectTrigger id="careerInterest">
                       <SelectValue placeholder="Select your interest" />
@@ -572,18 +449,14 @@ const RegistrationForm = () => {
                       <SelectItem value="hotel">Hotel Management</SelectItem>
                       <SelectItem value="events">Events & Banquets</SelectItem>
                       <SelectItem value="guest">Guest Relations</SelectItem>
-                      <SelectItem value="luxury">
-                        Luxury Brand Careers
-                      </SelectItem>
+                      <SelectItem value="luxury">Luxury Brand Careers</SelectItem>
                       <SelectItem value="undecided">Undecided</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label htmlFor="mattersMost">
-                    What matters most to you? *
-                  </Label>
+                  <Label htmlFor="mattersMost">What matters most to you? *</Label>
                   <Select name="mattersMost" required>
                     <SelectTrigger id="mattersMost">
                       <SelectValue placeholder="Select" />
@@ -592,9 +465,7 @@ const RegistrationForm = () => {
                       <SelectItem value="placement">Placement</SelectItem>
                       <SelectItem value="confidence">Confidence</SelectItem>
                       <SelectItem value="career">Good Career</SelectItem>
-                      <SelectItem value="practical">
-                        Practical Education
-                      </SelectItem>
+                      <SelectItem value="practical">Practical Education</SelectItem>
                       <SelectItem value="prestige">Prestige College</SelectItem>
                     </SelectContent>
                   </Select>
