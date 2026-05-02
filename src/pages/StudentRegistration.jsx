@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ExternalLink,
   Users,
@@ -88,6 +89,7 @@ const StudentRegistration = () => {
   const [paymentFilter, setPaymentFilter] = useState("All");
   const [sortKey, setSortKey] = useState("studentName");
   const [sortAsc, setSortAsc] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function load() {
@@ -161,7 +163,8 @@ const StudentRegistration = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // or your auth key
-    window.location.href = "/login"; // redirect
+    localStorage.removeItem("user");
+    navigate("/login", { replace: true });
   };
 
   return (
