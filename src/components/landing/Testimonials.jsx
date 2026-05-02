@@ -1,9 +1,9 @@
 import { Quote } from "lucide-react";
 
 const testimonials = [
-  { quote: "My son became more confident within months. He talks like a professional now.", name: "Mrs. Anjali Sharma", role: "Parent · Mumbai" },
-  { quote: "We wanted a practical career option for our daughter. This was the best decision.", name: "Mr. Rajesh Iyer", role: "Parent · Pune" },
-  { quote: "My daughter found direction, confidence, and a career she's genuinely excited about.", name: "Mrs. Fatima Khan", role: "Parent · Hyderabad" },
+  // { quote: "My son became more confident within months. He talks like a professional now.", name: "Mrs. Anjali Sharma", role: "Parent · Mumbai" },
+  // { quote: "We wanted a practical career option for our daughter. This was the best decision.", name: "Mr. Rajesh Iyer", role: "Parent · Pune" },
+  // { quote: "My daughter found direction, confidence, and a career she's genuinely excited about.", name: "Mrs. Fatima Khan", role: "Parent · Hyderabad" },
 ];
 
 const Testimonials = () => {
@@ -11,9 +11,9 @@ const Testimonials = () => {
     <section className="py-20 sm:py-28 bg-section-gradient">
       <div className="container">
         <div className="max-w-3xl mx-auto text-center mb-14">
-          <div className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">Trusted By Families</div>
+          <div className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">Complete your registration in under 2-minutes & confirm your seat.</div>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-navy mb-5">
-            Families Trust <em className="not-italic text-gradient-gold">A-Star Academy</em>
+            Secure Your <em className="not-italic text-gradient-gold">Career Path Today</em>
           </h2>
         </div>
 

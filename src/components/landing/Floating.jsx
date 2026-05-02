@@ -6,7 +6,9 @@ import { MessageCircle, Phone, X } from "lucide-react";
 export const StickyMobileCTA = () => (
   <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-navy-deep/95 backdrop-blur border-t border-gold/30 px-3 py-2.5 flex gap-2 shadow-luxury">
     <Button asChild variant="outline-ivory" size="default" className="flex-1">
+
       <a href="tel:+918657411592"><Phone className="h-4 w-4" /> Counsellor</a>
+
     </Button>
     <Button asChild variant="gold" size="default" className="flex-1">
       <a href="#register">Register ₹500</a>
@@ -16,7 +18,9 @@ export const StickyMobileCTA = () => (
 
 export const WhatsAppFloat = () => (
   <a
+
     href="https://wa.me/918657411592?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20A-Star%20Academy"
+
     target="_blank"
     rel="noreferrer"
     aria-label="Chat on WhatsApp"
@@ -63,7 +67,11 @@ export const ExitIntentPopup = () => {
             </DialogHeader>
             <div className="mt-6 flex flex-col gap-2">
               <Button asChild variant="gold" size="lg">
+
                 <a href="tel:+918657411592">Get Free Counselling Call</a>
+
+                <a href="tel:+919999999999">Get Free Counselling Call</a>
+
               </Button>
               <Button variant="outline-ivory" size="lg" onClick={() => setOpen(false)}>
                 Maybe Later

@@ -15,7 +15,7 @@ const Urgency = () => {
         </h2>
         <p className="text-ivory/75 text-lg sm:text-xl mb-10 max-w-2xl mx-auto">
           Don't let your child drift after 12th — or risk a career being eaten by AI.
-          Choose an industry that hires humans, with a 100% job guarantee in writing.
+          Choose an industry that hires humans, with a 100% job guarantee.
         </p>
         <Button asChild variant="gold" size="xl" className="text-base">
           <a href="#register">Secure Guaranteed Seat →</a>

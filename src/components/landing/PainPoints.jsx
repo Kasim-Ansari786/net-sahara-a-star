@@ -1,10 +1,10 @@
 import { AlertTriangle, UserX, BookX, Bot } from "lucide-react";
 
 const pains = [
-  { icon: AlertTriangle, title: "Traditional Degrees, Unclear Jobs", desc: "Thousands graduate every year without direction or employability." },
-  { icon: Bot, title: "AI Is Replacing IT & BPO Jobs", desc: "Coding, content and call-center roles are shrinking fast. Hospitality is not — it runs on people." },
-  { icon: UserX, title: "Lack of Confidence", desc: "Many students never become industry ready or feel professionally prepared." },
-  { icon: BookX, title: "No Job Promise, Just Hope", desc: "Most colleges offer 'placement support'. We offer a 100% job guarantee in writing." },
+  { icon: AlertTriangle, title: "Traditional Degrees, Uncertain Outcomes", desc: "Many graduates complete degrees without practical skills or job readiness." },
+  { icon: Bot, title: "AI-Disrupting Job Market", desc: "AI is changing the job market with automation however, hospitality industry is unaffected as it runs on people." },
+  { icon: UserX, title: "Lack of Industry led mentors", desc: "Many students never become industry ready or feel professionally prepared, at A-Star we inculcate that." },
+  { icon: BookX, title: "No Clear Career Path and Stability", desc: "Most colleges offer 'placement support'. We offer structured outcome + 100% job guarantee." },
 ];
 
 const PainPoints = () => {
@@ -12,12 +12,12 @@ const PainPoints = () => {
     <section className="py-20 sm:py-28 bg-section-gradient">
       <div className="container">
         <div className="max-w-3xl mx-auto text-center mb-14">
-          <div className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">For Every Concerned Parent</div>
+          <div className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">For Every Concerned Graduate</div>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-navy mb-5">
-            Worried About Your Child's <em className="not-italic text-gradient-gold">Future</em>?
+            Worried About Your <em className="not-italic text-gradient-gold">Future</em>?
           </h2>
           <p className="text-muted-foreground text-lg">
-            You're not alone. Every parent today asks the same questions after their child finishes 12th.
+            After 12th, most students choose degrees withot clarity, direction, or real-world exposure.
           </p>
         </div>
 
@@ -39,7 +39,7 @@ const PainPoints = () => {
         <div className="mt-14 text-center">
           <div className="gold-divider-thick mx-auto mb-6" />
           <p className="font-display text-2xl sm:text-3xl text-navy">
-            <em className="not-italic text-gradient-gold">A-Star Academy</em> changes that.
+            <em className="not-italic text-gradient-gold">A-Star Academy's Curriculum, Designed</em> For the Industry, By the Industry, Of the Industry.
           </p>
         </div>
       </div>

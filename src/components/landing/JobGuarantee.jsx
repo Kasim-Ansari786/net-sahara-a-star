@@ -4,13 +4,13 @@ import { Button } from "@/components/ui/button";
 const points = [
   {
     icon: ShieldCheck,
-    title: "Written 100% Job Guarantee",
-    desc: "Every successful graduate is guaranteed a placement — backed in writing, not just words.",
+    title: "Career in Industries",
+    desc: "Hotels, Cruise lines, Airlines, Airports, Facility Management, Retail, Events, Healthcare & Wellness.",
   },
   {
     icon: Bot,
-    title: "AI-Proof Career",
-    desc: "Hospitality runs on human warmth, hosting, and service — work that AI simply cannot replace.",
+    title: "High-demand in jobs",
+    desc: "As per Govt of India, hospitality is the 3rd largest employer with 2.3 million jobs and growing.",
   },
   {
     icon: BriefcaseBusiness,
@@ -37,14 +37,15 @@ const JobGuarantee = () => {
             Our Promise to Every Parent
           </div>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl mb-6 leading-tight">
-            <em className="not-italic text-gradient-gold">100% Job Guarantee.</em>
+            <em className="not-italic text-gradient-gold">A Career Built On</em>
             <br />
-            A Career <span className="text-gold">AI Cannot Replace.</span>
+            Industry Exposure <span className="text-gold">& Skills.</span>
           </h2>
           <div className="gold-divider-thick mx-auto mb-6" />
           <p className="text-ivory/80 text-lg sm:text-xl leading-relaxed">
-            While IT, BPO, and content roles are being disrupted by AI every month, hospitality keeps growing.
-            Hotels, restaurants, luxury travel, and live events are powered by people — not algorithms.
+            Hospitality continues to grow because it is powered by people, service, and real experiences 
+            — not automation. At A-Star Academy,<span className="text-gold"> our pedagogy</span> blends expert guidance
+             with hands-on training, equipping students with industry-leading skills.
           </p>
         </div>
 
