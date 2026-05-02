@@ -29,11 +29,16 @@ const Footer = () => {
           <div>
             <div className="font-display text-ivory mb-4">Contact</div>
             <ul className="space-y-2 text-sm">
+<<<<<<< HEAD
 
               <li><a href="tel:+918657411592" className="hover:text-gold transition-smooth">+91 86574 11592</a></li>
               <li><a href="mailto:info@astaracademy.in" className="hover:text-gold transition-smooth">info@astaracademy.in</a></li>
 
              
+=======
+              <li><a href="tel:+91 86574 11592" className="hover:text-gold transition-smooth">+91 86574 11592</a></li>
+              <li><a href="mailto:admissions@astaracademy.in" className="hover:text-gold transition-smooth">admissions@astaracademy.in</a></li>
+>>>>>>> 5627e73 (remove supabase, use localStorage)
               <li>Sahara Star, Mumbai</li>
             </ul>
           </div>

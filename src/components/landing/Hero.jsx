@@ -96,6 +96,7 @@ const Hero = () => {
             <Button asChild variant="gold" size="xl" className="text-base">
               <a href="#register">Register for Entrance Test →</a>
             </Button>
+<<<<<<< HEAD
             <Button asChild variant="outline-ivory" size="xl">
               <a
                 href={brochurePdf}
@@ -104,6 +105,10 @@ const Hero = () => {
               >
                 Download Syllabus
               </a>
+=======
+             <Button asChild variant="outline-ivory" size="xl">
+              <a href="tel:+91 86574 11592">Speak to Counsellor</a>
+>>>>>>> 5627e73 (remove supabase, use localStorage)
             </Button>
           </div>
 

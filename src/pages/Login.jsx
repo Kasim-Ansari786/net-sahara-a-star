@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Brand from "@/components/Brand";
+<<<<<<< HEAD
 import { loginStudent } from "../../api";
+=======
+>>>>>>> 5627e73 (remove supabase, use localStorage)
 
 const styles = {
   page: {
@@ -188,15 +191,25 @@ const Login = () => {
   // Check if user is already logged in
   useEffect(() => {
     const user = localStorage.getItem("user");
+<<<<<<< HEAD
     //if (user) navigate("/dashboard", { replace: true });
+=======
+    if (user) navigate("/dashboard", { replace: true });
+>>>>>>> 5627e73 (remove supabase, use localStorage)
   }, [navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+<<<<<<< HEAD
 
     const cleanEmail = email.trim().toLowerCase();
     const cleanPassword = password.trim();
 
+=======
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanPassword = password.trim();
+
+>>>>>>> 5627e73 (remove supabase, use localStorage)
     if (!cleanEmail || !cleanPassword) {
       toast({
         title: "Missing Fields",
@@ -209,6 +222,7 @@ const Login = () => {
     setLoading(true);
 
     try {
+<<<<<<< HEAD
       const response = await loginStudent({
         email: cleanEmail,
         password: cleanPassword,
@@ -241,6 +255,48 @@ const Login = () => {
       const msg = error?.data?.message || error?.message || "Invalid email or password";
       toast({ title: "Login Failed", description: msg, variant: "destructive" });
 
+=======
+      // Check against registrations in localStorage
+      const allRegs = JSON.parse(localStorage.getItem("registrations") || "[]");
+      const regRow = allRegs.find(
+        (r) => r.email.trim().toLowerCase() === cleanEmail
+      );
+
+      if (!regRow) {
+        toast({
+          title: "Not Found",
+          description: "This email is not registered in our system.",
+          variant: "destructive",
+        });
+        navigate("/#register", { replace: true });
+        return;
+      }
+
+      if (regRow.password !== cleanPassword) {
+        toast({
+          title: "Login Failed",
+          description: "Incorrect password. Please try again.",
+          variant: "destructive",
+        });
+        setPassword("");
+        return;
+      }
+
+      // Save logged in user
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ email: cleanEmail, id: regRow.id })
+      );
+
+      toast({ title: "Success", description: "Logging you in..." });
+      navigate("/dashboard", { replace: true });
+    } catch (err) {
+      toast({
+        title: "Login Failed",
+        description: err.message,
+        variant: "destructive",
+      });
+>>>>>>> 5627e73 (remove supabase, use localStorage)
     } finally {
       setLoading(false);
     }
@@ -254,9 +310,20 @@ const Login = () => {
           ← Back to home
         </Link>
 
+<<<<<<< HEAD
         <div className="mb-8">
           <Brand to="/" subtitle="Student Portal" priority />
         </div>
+=======
+         <div className="mb-8">
+          <Brand to="/" subtitle="Student Portal" priority />
+        </div>
+
+        {/* <div style={styles.brand}>
+          <p style={styles.brandTitle}>YourBrand</p>
+          <p style={styles.brandSubtitle}>Student Portal</p>
+        </div> */}
+>>>>>>> 5627e73 (remove supabase, use localStorage)
 
         <div style={styles.card}>
           <div style={styles.cardBody}>
