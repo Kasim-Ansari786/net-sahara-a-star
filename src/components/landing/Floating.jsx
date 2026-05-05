@@ -67,11 +67,7 @@ export const ExitIntentPopup = () => {
             </DialogHeader>
             <div className="mt-6 flex flex-col gap-2">
               <Button asChild variant="gold" size="lg">
-
                 <a href="tel:+918657411592">Get Free Counselling Call</a>
-
-                <a href="tel:+919999999999">Get Free Counselling Call</a>
-
               </Button>
               <Button variant="outline-ivory" size="lg" onClick={() => setOpen(false)}>
                 Maybe Later

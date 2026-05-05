@@ -2,20 +2,21 @@ import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const useMock = import.meta.env.VITE_SUPABASE_MOCK === "true";
+const useMockFlag = import.meta.env.VITE_SUPABASE_MOCK === "true";
 
-if (!useMock) {
-  if (!supabaseUrl) {
-    throw new Error("Missing VITE_SUPABASE_URL");
-  }
-
-  if (!supabaseKey) {
-    throw new Error("Missing VITE_SUPABASE_ANON_KEY");
-  }
+// If envs are missing in a deployed environment, don't throw during module
+// evaluation — that will crash the whole app. Instead fall back to the mock
+// implementation and log a warning so the deployment can be fixed.
+let resolvedUseMock = Boolean(useMockFlag);
+if (!resolvedUseMock && (!supabaseUrl || !supabaseKey)) {
+  console.warn(
+    "Supabase env missing — falling back to mock supabase. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your environment for production."
+  );
+  resolvedUseMock = true;
 }
 
 // DEBUG LOG (check in browser console)
-console.log("Supabase URL:", supabaseUrl, "(mock enabled:", useMock, ")");
+console.log("Supabase URL:", supabaseUrl, "(mock enabled:", resolvedUseMock, ")");
 
 function createMockSupabase() {
   const mockDB = {
@@ -108,4 +109,4 @@ function createMockSupabase() {
   };
 }
 
-export const supabase = useMock ? createMockSupabase() : createClient(supabaseUrl, supabaseKey);
+export const supabase = resolvedUseMock ? createMockSupabase() : createClient(supabaseUrl, supabaseKey);
