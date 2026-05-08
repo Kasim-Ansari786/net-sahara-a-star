@@ -4,26 +4,26 @@ const visions = [
   {
     icon: Mic,
     label: "Year 1 — Foundation",
-    title: "Building confidence in real environments.",
-    desc: "Interacting with guests, teams, and professionals from the start.",
+    title: "Building Confidence & Personality",
+    desc: "Improve communication, spoken English, grooming, and professional behaviour.",
   },
   {
     icon: Hotel,
     label: "Year 2 — Skill Development",
-    title: "Working across hotel departments",
-    desc: "Gaining hands-on experience in culinary, service, and operations.",
+    title: "Learning Real Hospitality Operations",
+    desc: "Gain practical exposure across departments, service environments, and guest interactions.",
   },
   {
     icon: CalendarCheck,
     label: "Year 3 — Industry Exposure",
-    title: "Taking responsibility in real scenarios",
-    desc: "Understanding operations, teamwork, and service standards.",
+    title: "Becoming Industry-Ready",
+    desc: "Develop leadership, professionalism, discipline, and operational confidence.",
   },
   {
     icon: Wallet,
     label: "After Graduation — Stable Job",
-    title: "Earning, growing, and becoming independent",
-    desc: "Take up jobs prepared for real roles with experience and confidence.",
+    title: "Entering The Industry With Confidence",
+    desc: "Step into hospitality careers prepared with real exposure and practical understanding.",
   },
 ];
 

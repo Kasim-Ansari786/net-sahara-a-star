@@ -17,31 +17,24 @@ import { registerStudent } from "../../../api";
 // ─── PayU payment link ───────────────────────────────────────────────────────
 const PAYU_LINK = "https://u.payu.in/PAYUMN/2raSPHLNDEcz";
 
-const schema = z
-  .object({
-    studentName: z.string().trim().min(2, "Min 2 characters").max(100),
-    parentName: z.string().trim().min(2, "Min 2 characters").max(100),
-    mobile: z
-      .string()
-      .trim()
-      .regex(/^[0-9]{10}$/, "10-digit mobile required"),
-    whatsapp: z
-      .string()
-      .trim()
-      .regex(/^[0-9]{10}$/, "10-digit WhatsApp required"),
-    email: z.string().trim().email("Invalid email").max(255),
-    city: z.string().trim().min(2).max(100),
-    twelfthStatus: z.string().min(1, "Required"),
-    stream: z.string().min(1, "Required"),
-    careerInterest: z.string().min(1, "Required"),
-    mattersMost: z.string().min(1, "Required"),
-    password: z.string().min(8, "Password must be at least 8 characters"),
-    confirmPassword: z.string().min(1, "Confirm your password"),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  });
+const schema = z.object({
+  studentName: z.string().trim().min(2, "Min 2 characters").max(100),
+  parentName: z.string().trim().min(2, "Min 2 characters").max(100),
+  mobile: z
+    .string()
+    .trim()
+    .regex(/^[0-9]{10}$/, "10-digit mobile required"),
+  whatsapp: z
+    .string()
+    .trim()
+    .regex(/^[0-9]{10}$/, "10-digit WhatsApp required"),
+  email: z.string().trim().email("Invalid email").max(255),
+  city: z.string().trim().min(2).max(100),
+  twelfthStatus: z.string().min(1, "Required"),
+  stream: z.string().min(1, "Required"),
+  careerInterest: z.string().min(1, "Required"),
+  mattersMost: z.string().min(1, "Required"),
+});
 
 const RegistrationForm = () => {
   const { toast } = useToast();
@@ -67,8 +60,6 @@ const handleSubmit = async (e) => {
     stream: String(fd.get("stream") ?? ""),
     careerInterest: String(fd.get("careerInterest") ?? ""),
     mattersMost: String(fd.get("mattersMost") ?? ""),
-    password: String(fd.get("password") ?? ""),
-    confirmPassword: String(fd.get("confirmPassword") ?? ""),
   };
 
   const parsed = schema.safeParse(raw);
@@ -83,15 +74,7 @@ const handleSubmit = async (e) => {
     return;
   }
 
-  // ❌ Password mismatch (redundant because of refine, but keep user-friendly message)
-  if (parsed.data.password !== parsed.data.confirmPassword) {
-    toast({
-      title: "Error",
-      description: "Passwords do not match",
-      variant: "destructive",
-    });
-    return;
-  }
+  // no password fields for student registration
 
   setSubmitting(true);
   try {
@@ -107,7 +90,6 @@ const handleSubmit = async (e) => {
       stream: parsed.data.stream,
       careerInterest: parsed.data.careerInterest,
       mattersMost: parsed.data.mattersMost,
-      password: parsed.data.password,
     };
 
     const res = await registerStudent(payload);
@@ -432,7 +414,7 @@ const handleSubmit = async (e) => {
                   </div>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4">
+                {/* <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <Label htmlFor="password">Password *</Label>
                     <Input id="password" name="password" type="password" required placeholder="••••••••" />
@@ -441,7 +423,7 @@ const handleSubmit = async (e) => {
                     <Label htmlFor="confirmPassword">Confirm Password *</Label>
                     <Input id="confirmPassword" name="confirmPassword" type="password" required placeholder="••••••••" />
                   </div>
-                </div>
+                </div> */}
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">

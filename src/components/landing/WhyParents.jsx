@@ -1,12 +1,36 @@
 import { Building2, Sparkles, Briefcase, ShieldCheck, Award, Globe2 } from "lucide-react";
 
 const reasons = [
-  { icon: Building2, title: "Real Industry Environment", desc: "Learn inside the Sahara Star ecosystem — not just in classrooms." },
-  { icon: Sparkles, title: "Personality Development", desc: "Communication, grooming, etiquette, and unshakeable confidence." },
-  { icon: Briefcase, title: "Career-Oriented Education", desc: "Skills employers actively look for — taught by industry professionals." },
-  { icon: Award, title: "100% Job Guarantee", desc: "A written placement guarantee on successful course completion — not just assistance." },
-  { icon: ShieldCheck, title: "Safe & Disciplined Campus", desc: "A structured, professional environment families can trust." },
-  { icon: Globe2, title: "AI-Proof Growth Industry", desc: "Hospitality is human-driven and global — unaffected by the AI disruption hitting IT and BPO." },
+  {
+    icon: Building2,
+    title: "Real Industry Environment",
+    desc: "Students learn in a professional hospitality atmosphere from the beginning.",
+  },
+  {
+    icon: Sparkles,
+    title: "Personality Development",
+    desc: "Confidence, communication, grooming, etiquette, and leadership become part of daily learning.",
+  },
+  {
+    icon: Briefcase,
+    title: "Practical Hospitality Training",
+    desc: "Students experience hospitality operations beyond textbooks and classrooms.",
+  },
+  {
+    icon: Award,
+    title: "Structured Professional Culture",
+    desc: "Discipline, responsibility, punctuality, and teamwork are built into the learning journey.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Career-Oriented Learning",
+    desc: "Every aspect of training is aligned with real hospitality careers and industry expectations.",
+  },
+  {
+    icon: Globe2,
+    title: "Future-Ready Industry",
+    desc: "Hospitality remains one of the world’s strongest people-driven industries.",
+  },
 ];
 
 const WhyParents = () => {
@@ -17,9 +41,9 @@ const WhyParents = () => {
 
       <div className="relative container">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">Why Parents Choose Us</div>
+          <div className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">WHY PARENTS TRUST US</div>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl mb-5">
-            Built for the Future <em className="not-italic text-gradient-gold">You Want</em> for Your Child
+           A Career Environment <em className="not-italic text-gradient-gold">Built Around</em> Discipline & Growth
           </h2>
           <div className="gold-divider-thick mx-auto" />
         </div>

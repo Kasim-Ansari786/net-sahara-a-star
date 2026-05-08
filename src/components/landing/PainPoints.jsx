@@ -1,10 +1,10 @@
 import { AlertTriangle, UserX, BookX, Bot } from "lucide-react";
 
 const pains = [
-  { icon: AlertTriangle, title: "Traditional Degrees, Uncertain Outcomes", desc: "Many graduates complete degrees without practical skills or job readiness." },
-  { icon: Bot, title: "AI-Disrupting Job Market", desc: "AI is changing the job market with automation however, hospitality industry is unaffected as it runs on people." },
-  { icon: UserX, title: "Lack of Industry led mentors", desc: "Many students never become industry ready or feel professionally prepared, at A-Star we inculcate that." },
-  { icon: BookX, title: "No Clear Career Path and Stability", desc: "Most colleges offer 'placement support'. We offer structured outcome + 100% job guarantee." },
+  { icon: AlertTriangle, title: "Beyond Classroom Education", desc: "Hospitality is lived through real interactions, practical learning, and industry exposure." },
+  { icon: Bot, title: "Personality Matters", desc: "Your spoken English, confidence, appearance, etiquette, and attitude shape your future." },
+  { icon: UserX, title: "Learn From The Industry", desc: "Train under hospitality professionals inside a real 5-star hotel ecosystem." },
+  { icon: BookX, title: "Career-Focused Selection", desc: "This is not mass admission. We identify students with potential to lead." },
 ];
 
 const PainPoints = () => {
@@ -12,12 +12,13 @@ const PainPoints = () => {
     <section className="py-20 sm:py-28 bg-section-gradient">
       <div className="container">
         <div className="max-w-3xl mx-auto text-center mb-14">
-          <div className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">For Every Concerned Graduate</div>
+          <div className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">FOR AMBITIOUS STUDENTS</div>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-navy mb-5">
-            Worried About Your <em className="not-italic text-gradient-gold">Future</em>?
+            One Step Towards a Brighter <em className="not-italic text-gradient-gold">Future</em>?
           </h2>
           <p className="text-muted-foreground text-lg">
-            After 12th, most students choose degrees withot clarity, direction, or real-world exposure.
+            The Hospitality Industry Doesn’t Just Need Degrees. It Needs Personality.
+
           </p>
         </div>
 
@@ -39,7 +40,7 @@ const PainPoints = () => {
         <div className="mt-14 text-center">
           <div className="gold-divider-thick mx-auto mb-6" />
           <p className="font-display text-2xl sm:text-3xl text-navy">
-            <em className="not-italic text-gradient-gold">A-Star Academy's Curriculum, Designed</em> For the Industry, By the Industry, Of the Industry.
+            <em className="not-italic text-gradient-gold">A-Star Academy — </em> By The Industry. Of The Industry. For The Industry.
           </p>
         </div>
       </div>

@@ -63,7 +63,7 @@ const EntranceTest = () => {
             <em className="not-italic text-gradient-gold">A-Star Academy</em>
           </h2>
           <p className="text-ivory/75 text-lg">
-            Secure your seat in India's most aspirational hospitality program.
+            Admission is based on selection, potential, communication, confidence, and personality assessment.
           </p>
         </div>
 
@@ -99,7 +99,7 @@ const EntranceTest = () => {
             <a href="#register">Secure My Seat Now →</a>
           </Button>
           <p className="text-xs text-ivory/60 mt-4 uppercase tracking-[0.2em]">
-            Limited seats · First come, first served
+            Limited Seats • Selection Based Admissions
           </p>
         </div>
       </div>

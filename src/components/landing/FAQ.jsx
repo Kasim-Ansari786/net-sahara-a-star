@@ -15,7 +15,7 @@ const FAQ = () => {
     <section id="faq" className="py-20 sm:py-28 bg-section-gradient">
       <div className="container max-w-4xl">
         <div className="text-center mb-12">
-          <div className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">Parents Often Ask</div>
+          <div className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">PARENTS & STUDENTS ASK</div>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-navy mb-5">
             Your Questions, <em className="not-italic text-gradient-gold">Answered</em>
           </h2>

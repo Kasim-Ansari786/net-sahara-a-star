@@ -1,14 +1,23 @@
-import { ChefHat, Building, Users, Calendar, Plane, Crown, Smile, Star } from "lucide-react";
+import {
+  ChefHat,
+  Building,
+  Users,
+  Calendar,
+  Plane,
+  Crown,
+  Smile,
+  Star,
+} from "lucide-react";
 
 const items = [
-  { icon: ChefHat, label: "Chef Training" },
-  { icon: Building, label: "Hotel Management" },
+  { icon: ChefHat, label: "Hotel Operations" },
+  { icon: Building, label: "Culinary Training" },
   { icon: Users, label: "Guest Relations" },
-  { icon: Calendar, label: "Events" },
-  { icon: Plane, label: "Travel Opportunities" },
-  { icon: Crown, label: "Luxury Brand Careers" },
-  { icon: Smile, label: "Confidence Boost" },
-  { icon: Star, label: "Leadership Skills" },
+  { icon: Calendar, label: "Luxury Service Standards" },
+  { icon: Plane, label: " Communication Skills" },
+  { icon: Crown, label: " Grooming & Etiquette" },
+  { icon: Smile, label: " Leadership Development" },
+  { icon: Star, label: "Career Confidence" },
 ];
 
 const WhyStudents = () => {
@@ -16,12 +25,17 @@ const WhyStudents = () => {
     <section className="py-20 sm:py-28 bg-section-gradient">
       <div className="container">
         <div className="max-w-3xl mx-auto text-center mb-14">
-          <div className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">For Students</div>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-navy mb-5">
-            Not Just Study. <em className="not-italic text-gradient-gold">Become Impressive.</em>
+          <div className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">
+            FOR FUTURE PROFESSIONALS
+          </div>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-navy mb-5 whitespace-nowrap">
+            Not Just Study.{" "}
+            <em className="not-italic text-gradient-gold">
+              Become Industry-Ready.
+            </em>
           </h2>
           <p className="text-muted-foreground text-lg">
-            A modern, exciting career — with travel, prestige, lifestyle, and growth.
+            Build confidence, communication, personality, leadership, and practical hospitality skills in a real-world environment.
           </p>
         </div>
 
@@ -34,7 +48,9 @@ const WhyStudents = () => {
               <div className="mx-auto h-14 w-14 rounded-full bg-navy/5 group-hover:bg-gold-gradient flex items-center justify-center mb-4 transition-smooth">
                 <it.icon className="h-7 w-7 text-navy group-hover:text-navy-deep transition-smooth" />
               </div>
-              <div className="font-display text-base sm:text-lg text-navy">{it.label}</div>
+              <div className="font-display text-base sm:text-lg text-navy">
+                {it.label}
+              </div>
             </div>
           ))}
         </div>

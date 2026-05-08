@@ -1,26 +1,31 @@
-import { ShieldCheck, BriefcaseBusiness, Bot, HandshakeIcon } from "lucide-react";
+import {
+  ShieldCheck,
+  BriefcaseBusiness,
+  Bot,
+  HandshakeIcon,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const points = [
   {
     icon: ShieldCheck,
-    title: "Career in Industries",
-    desc: "Hotels, Cruise lines, Airlines, Airports, Facility Management, Retail, Events, Healthcare & Wellness.",
+    title: "Learn Inside A 5-Star Hotel",
+    desc: "Train within the Hotel Sahara Star ecosystem and experience hospitality first-hand.",
   },
   {
     icon: Bot,
-    title: "High-demand in jobs",
-    desc: "As per Govt of India, hospitality is the 3rd largest employer with 2.3 million jobs and growing.",
+    title: "Industry Exposure From Day One",
+    desc: "Understand real hotel operations, guest interactions, teamwork, and service standards.",
   },
   {
     icon: BriefcaseBusiness,
-    title: "Industry Hiring Network",
-    desc: "Direct hiring pipeline with Sahara Star and partner luxury hotels, restaurants & event brands.",
+    title: "Mentorship By Professionals",
+    desc: "Learn directly from hospitality experts and experienced industry leaders.",
   },
   {
     icon: HandshakeIcon,
-    title: "Career, Not Just a Degree",
-    desc: "You don't graduate hoping for a job. You graduate already placed in one.",
+    title: "Career With Identity",
+    desc: "Graduate with confidence, personality, communication skills, and practical exposure.",
   },
 ];
 
@@ -34,18 +39,20 @@ const JobGuarantee = () => {
         <div className="max-w-3xl mx-auto text-center mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-gold/10 text-xs uppercase tracking-[0.25em] text-gold mb-6">
             <ShieldCheck className="h-3.5 w-3.5" />
-            Our Promise to Every Parent
+            OUR PROMISE TO EVERY STUDENT
           </div>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl mb-6 leading-tight">
-            <em className="not-italic text-gradient-gold">A Career Built On</em>
+            <span className="whitespace-nowrap">
+              Begin Your Hospitality Journey
+            </span>
             <br />
-            Industry Exposure <span className="text-gold">& Skills.</span>
+             <span className="text-gold">Inside The Real Industry.</span>
           </h2>
           <div className="gold-divider-thick mx-auto mb-6" />
           <p className="text-ivory/80 text-lg sm:text-xl leading-relaxed">
-            Hospitality continues to grow because it is powered by people, service, and real experiences 
-            — not automation. At A-Star Academy,<span className="text-gold"> our pedagogy</span> blends expert guidance
-             with hands-on training, equipping students with industry-leading skills.
+            At A-Star Academy, you don’t prepare for the industry later — 
+            <span className="text-gold"> you begin inside it from day one. </span>Learn in the environment where luxury, 
+            service, professionalism, and leadership are created every single day.
           </p>
         </div>
 
@@ -58,7 +65,9 @@ const JobGuarantee = () => {
               <div className="h-12 w-12 rounded-lg bg-gold-gradient flex items-center justify-center shadow-gold mb-5">
                 <p.icon className="h-6 w-6 text-navy-deep" />
               </div>
-              <h3 className="font-display text-xl text-ivory mb-2">{p.title}</h3>
+              <h3 className="font-display text-xl text-ivory mb-2">
+                {p.title}
+              </h3>
               <p className="text-sm text-ivory/70 leading-relaxed">{p.desc}</p>
             </div>
           ))}
