@@ -24,10 +24,10 @@ import jsPDF from "jspdf";
 import logo from "@/assets/logo.png";
 import Brand from "@/components/Brand";
 
-const EXAM_DATE = "17 May 2026";
+const EXAM_DATE = "24 May 2026";
 const EXAM_TIME = "10:00 AM IST";
 const EXAM_VENUE = "Sahara Star Campus, Vile Parle (E), Mumbai";
-const EXAM_DATETIME_ISO = "2026-05-17T10:00:00+05:30";
+const EXAM_DATETIME_ISO = "2026-05-24T10:00:00+05:30";
 
 const Dashboard = () => {
   const navigate = useNavigate();

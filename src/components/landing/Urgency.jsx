@@ -19,7 +19,7 @@ const Urgency = () => {
         <Button asChild variant="gold" size="xl" className="text-base">
           <a href="#register">Register For Entrance Test →</a>
         </Button>
-        <p className="mt-5 text-xs text-ivory/50 uppercase tracking-[0.2em]">Exam Date: 17 May · Online · 45 minutes</p>
+        <p className="mt-5 text-xs text-ivory/50 uppercase tracking-[0.2em]">Exam Date: 24 May · Online · 45 minutes</p>
       </div>
     </section>
   );

@@ -160,7 +160,7 @@ const handleSubmit = async (e) => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Exam Date</span>
-                      <span className="font-medium text-navy">17 May 2025</span>
+                      <span className="font-medium text-navy">24 May 2025</span>
                     </div>
                     <div className="flex justify-between border-t border-gold/20 pt-2 mt-2">
                       <span className="text-muted-foreground">Registration Fee</span>
@@ -257,7 +257,7 @@ const handleSubmit = async (e) => {
                   via SMS, WhatsApp & Email.
                 </p>
                 <div className="p-4 rounded-xl bg-gold/5 border border-gold/20 text-sm text-navy mb-8">
-                  📅 <span className="font-semibold">Exam Date: 17 May 2025</span>
+                  📅 <span className="font-semibold">Exam Date: 24 May 2025</span>
                   <br />
                   <span className="text-muted-foreground text-xs">Keep your hall ticket ready</span>
                 </div>
@@ -295,7 +295,7 @@ const handleSubmit = async (e) => {
             <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
               Complete the registration in under 2 minutes. Pay ₹500 to confirm
               your seat for the National Entrance Test on{" "}
-              <span className="text-navy font-semibold">17 May</span>.
+              <span className="text-navy font-semibold">24 May</span>.
             </p>
 
             {/* Steps indicator */}

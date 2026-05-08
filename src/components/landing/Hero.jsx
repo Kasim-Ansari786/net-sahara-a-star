@@ -45,9 +45,9 @@ const Hero = () => {
             </a>
           </div>
           <Button asChild variant="gold" size="sm" className="h-9">
-            <a href="/login" aria-label="Login to your student dashboard">
+            {/* <a href="/login" aria-label="Login to your student dashboard">
               Login
-            </a>
+            </a> */}
           </Button>
         </div>
       </div>

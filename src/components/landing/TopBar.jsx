@@ -14,7 +14,7 @@ const TopBar = () => {
           <span>National Entrance Test</span>
           <span className="hidden sm:inline text-gold/40">|</span>
           <span>
-            Exam Date: <span className="text-gold font-medium">17 May</span>
+            Exam Date: <span className="text-gold font-medium">24 May</span>
           </span>
           <span className="hidden sm:inline text-gold/40">|</span>
           <span>₹500 Registration</span>

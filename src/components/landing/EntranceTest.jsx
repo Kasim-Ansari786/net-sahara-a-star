@@ -34,7 +34,7 @@ const Cell = ({ value, label }) => (
 );
 
 const details = [
-  { icon: Calendar,     label: "Date",      value: "17 May 2026" },
+  { icon: Calendar,     label: "Date",      value: "24 May 2026" },
   { icon: Monitor,      label: "Mode",      value: "Online" },
   { icon: Clock,        label: "Duration",  value: "45 minutes" },
   { icon: FileText,     label: "Questions", value: "50 MCQs" },
