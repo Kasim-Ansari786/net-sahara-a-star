@@ -1,18 +1,6 @@
 // src/api/index.js
 
-let API_BASE = import.meta.env.VITE_API_URL || "https://backend.comdata.in";
-
-// Prefer local backend at runtime if the app is served from localhost
-if (typeof window !== "undefined") {
-  const host = window.location.hostname;
-  if (!import.meta.env.VITE_API_URL && (host === "localhost" || host === "127.0.0.1")) {
-    API_BASE = "http://localhost:5000";
-  }
-  // In Vite dev builds import.meta.env.DEV will be true and VITE_API_URL may be unset
-  if (import.meta.env.DEV && !import.meta.env.VITE_API_URL) {
-    API_BASE = "http://localhost:5000";
-  }
-}
+const API_BASE = "https://backend.comdata.in";
 
 function buildUrl(path) {
   const base = API_BASE.replace(/\/$/, "");

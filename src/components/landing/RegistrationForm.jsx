@@ -160,7 +160,7 @@ const handleSubmit = async (e) => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Exam Date</span>
-                      <span className="font-medium text-navy">24 May 2025</span>
+                      <span className="font-medium text-navy">24 May 2026</span>
                     </div>
                     <div className="flex justify-between border-t border-gold/20 pt-2 mt-2">
                       <span className="text-muted-foreground">Registration Fee</span>
@@ -194,7 +194,7 @@ const handleSubmit = async (e) => {
                 </a>
 
                 {/* After returning from PayU */}
-                <div className="mt-4 p-4 rounded-xl border border-border bg-muted/30">
+                {/* <div className="mt-4 p-4 rounded-xl border border-border bg-muted/30">
                   <p className="text-sm text-muted-foreground mb-3">
                     ✅ Completed payment on PayU? Click below to confirm.
                   </p>
@@ -206,7 +206,7 @@ const handleSubmit = async (e) => {
                   >
                     I Have Paid — Confirm Registration
                   </Button>
-                </div>
+                </div> */}
 
                 {/* Trust badges */}
                 <div className="mt-6 flex items-center justify-center gap-6 text-xs text-muted-foreground">
@@ -257,7 +257,7 @@ const handleSubmit = async (e) => {
                   via SMS, WhatsApp & Email.
                 </p>
                 <div className="p-4 rounded-xl bg-gold/5 border border-gold/20 text-sm text-navy mb-8">
-                  📅 <span className="font-semibold">Exam Date: 24 May 2025</span>
+                  📅 <span className="font-semibold">Exam Date: 24 May 2026</span>
                   <br />
                   <span className="text-muted-foreground text-xs">Keep your hall ticket ready</span>
                 </div>

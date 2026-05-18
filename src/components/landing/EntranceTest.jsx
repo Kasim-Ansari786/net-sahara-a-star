@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Clock, FileText, IndianRupee, Monitor } from "lucide-react";
 
 // ✅ Updated to 2026 so the countdown is live
-const EXAM_DATE = new Date("2026-05-17T10:00:00+05:30");
+const EXAM_DATE = new Date("2026-05-24T10:00:00+05:30");
 
 const useCountdown = () => {
   const [now, setNow] = useState(Date.now());
